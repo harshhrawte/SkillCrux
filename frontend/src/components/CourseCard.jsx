@@ -12,38 +12,51 @@ const CourseCard = ({ course }) => {
     "Unassigned";
 
   return (
-    <div className="flex flex-col justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <div className="group flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
       <div>
         {/* Title */}
-        <h3 className="mb-1 text-lg font-semibold text-gray-900 truncate">
+        <h3 className="mb-2 text-xl font-bold text-gray-900 line-clamp-2">
           {title}
         </h3>
 
         {/* Description (truncated for long text) */}
-        <p className="mb-2 text-sm text-gray-600 line-clamp-2">
+        <p className="mb-3 text-sm text-gray-600 line-clamp-3">
           {description}
         </p>
 
         {/* Teacher info */}
-        <p className="text-xs text-gray-500">
-          Teacher:{" "}
-          <span className="font-medium text-gray-700">
-            {teacher}
+        <div className="flex items-center gap-2 text-xs text-gray-500">
+          <svg
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+          <span>
+            Teacher:{' '}
+            <span className="font-semibold text-gray-700">{teacher}</span>
           </span>
-        </p>
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4">
         <Link
           to={`/courses/${course.id}`}
-          className="text-sm font-medium text-blue-600 hover:text-blue-700"
+          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 hover:shadow-md"
         >
           View details
         </Link>
 
-        <span className="text-xs text-gray-400">
-          ID: {course.id}
+        <span className="text-xs font-mono text-gray-400">
+          #{course.id}
         </span>
       </div>
     </div>
@@ -51,4 +64,5 @@ const CourseCard = ({ course }) => {
 };
 
 export default CourseCard;
+
 

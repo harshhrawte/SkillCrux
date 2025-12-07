@@ -90,39 +90,39 @@ const AdminCourseManager = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Navbar />
 
-      <div className="mx-auto flex max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:px-8">
         <Sidebar />
 
         <main className="flex-1 space-y-6">
-          <header>
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Manage Courses
-            </h1>
-            <p className="mt-1 text-sm text-gray-600">
-              Create, update, and delete LMS courses.
-            </p>
+          <header className="mb-8">
+            <div className="rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white shadow-lg">
+              <h1 className="text-3xl font-bold">Manage Courses</h1>
+              <p className="mt-2 text-purple-100">
+                Create, update, and delete LMS courses.
+              </p>
+            </div>
           </header>
 
           {/* LOADING */}
           {initialLoading && (
-            <div className="flex h-40 items-center justify-center">
-              <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+            <div className="flex h-64 items-center justify-center rounded-xl bg-white p-8 shadow-sm">
+              <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
             </div>
           )}
 
           {!initialLoading && (
             <>
               {/* CREATE COURSE */}
-              <section className="rounded-lg bg-white p-4 shadow-sm">
-                <h2 className="mb-3 text-sm font-semibold text-gray-900">
+              <section className="rounded-xl bg-white p-6 shadow-md">
+                <h2 className="mb-4 text-xl font-bold text-gray-900">
                   Create new course
                 </h2>
 
                 {error && (
-                  <div className="mb-3 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+                  <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                     {error}
                   </div>
                 )}
@@ -137,7 +137,7 @@ const AdminCourseManager = () => {
                     required
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                   />
 
                   <input
@@ -145,7 +145,7 @@ const AdminCourseManager = () => {
                     placeholder="Description (optional)"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                   />
 
                   <div className="flex gap-2">
@@ -166,42 +166,41 @@ const AdminCourseManager = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="whitespace-nowrap rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="whitespace-nowrap rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-blue-700 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      {loading ? "Saving..." : "Create"}
+                      {loading ? 'Saving...' : 'Create'}
                     </button>
                   </div>
                 </form>
               </section>
 
               {/* EXISTING COURSES */}
-              <section className="rounded-lg bg-white p-4 shadow-sm">
-                <h2 className="mb-3 text-sm font-semibold text-gray-900">
+              <section className="rounded-xl bg-white p-6 shadow-md">
+                <h2 className="mb-4 text-xl font-bold text-gray-900">
                   Existing Courses
                 </h2>
 
-                <div className="space-y-2 text-sm">
+                <div className="space-y-3">
                   {courses.map((course) => (
                     <div
                       key={course.id}
-                      className="flex items-center justify-between rounded-md border border-gray-200 px-3 py-2"
+                      className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 transition hover:bg-gray-100"
                     >
                       <div>
-                        <p className="font-medium text-gray-900">
+                        <p className="font-semibold text-gray-900">
                           {course.title}
                         </p>
-
-                        <p className="text-xs text-gray-500">
-                          ID: {course.id} • Teacher:{" "}
+                        <p className="mt-1 text-xs text-gray-500">
+                          ID: {course.id} • Teacher:{' '}
                           {course.teacher_name ||
                             course.teacher_id ||
-                            "Unassigned"}
+                            'Unassigned'}
                         </p>
                       </div>
 
                       <button
                         onClick={() => handleDelete(course.id)}
-                        className="rounded-md bg-red-500 px-3 py-1 text-xs font-medium text-white hover:bg-red-600"
+                        className="rounded-lg bg-red-500 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-red-600 hover:shadow-md"
                       >
                         Delete
                       </button>
@@ -209,9 +208,11 @@ const AdminCourseManager = () => {
                   ))}
 
                   {courses.length === 0 && (
-                    <p className="text-sm text-gray-500">
-                      No courses created yet.
-                    </p>
+                    <div className="rounded-lg bg-gray-50 p-8 text-center">
+                      <p className="text-sm text-gray-500">
+                        No courses created yet.
+                      </p>
+                    </div>
                   )}
                 </div>
               </section>
@@ -224,4 +225,5 @@ const AdminCourseManager = () => {
 };
 
 export default AdminCourseManager;
+
 
